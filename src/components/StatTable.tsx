@@ -12,10 +12,10 @@ export const StatTable = ({ title, data, league } : { title : string, data: Stat
     columnHelper.accessor('team', {
       header: 'Team',
       cell: (cell) => (
-      <div className="flex items-center gap-2">
-        <TeamName teamName={ cell.row.original.team } name={ cell.row.original.player || cell.row.original.team } />
-      </div>
-    )
+        <div className="flex items-center gap-2">
+          <TeamName teamName={ cell.row.original.team } name={ cell.row.original.player || cell.row.original.team } />
+        </div>
+      )
     }),
     columnHelper.accessor('stat', {
       header: title
@@ -51,15 +51,18 @@ export const StatTable = ({ title, data, league } : { title : string, data: Stat
           ))}
           </TableHeader>
           <TableBody>
-          {table.getRowModel().rows.map(row => (
-            <TableRow key={row.id}>
-              {row.getVisibleCells().map(cell => (
-                <TableCell key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </TableCell>
-              ))}
-            </TableRow>
-          ))}
+          {table.getRowModel().rows.map((row, index) => {
+            if (index < 3) 
+            return (
+              <TableRow key={row.id}>
+                {row.getVisibleCells().map(cell => (
+                  <TableCell key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ) 
+          })}
         </TableBody>
         </Table>
       </div>

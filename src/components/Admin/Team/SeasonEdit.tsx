@@ -33,7 +33,7 @@ const formSchema = z.object({
   })
 })
 
-export const SeasonEdit = ({ data, seasonId, leagues, teamId } : { data: TeamSeasonType, seasonId: string, leagues: LeagueSummaryType[], teamId: string }) => {
+export const SeasonEdit = ({ data, seasonId, leagues, teamId } : { data: TeamSeasonType, seasonId: string, leagues?: LeagueSummaryType[], teamId: string }) => {
   const [ editForm, setEditForm ] = useState(false)
   const { toast } = useToast();
 
@@ -102,7 +102,7 @@ export const SeasonEdit = ({ data, seasonId, leagues, teamId } : { data: TeamSea
                       </FormControl>
                       <SelectContent>
                         {
-                          leagues.map(league => (
+                          leagues?.map(league => (
                             <SelectItem key={league._id} value={league._id}>{ league.league }</SelectItem>
                           ))
                         }

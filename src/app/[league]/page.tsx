@@ -1,6 +1,6 @@
 "use client"
 
-import { LeaguePage } from "@/components/LeaguePage/LeaguePage";
+import { LeagueContent } from "@/components/LeagueContent/LeagueContent";
 import { Loading } from "@/components/Loading";
 import { useLeagueByName } from "@/hooks/use-league";
 
@@ -17,7 +17,7 @@ export default function League({ params } : { params: { league: string, year: st
 
   return (
     <div>
-      <LeaguePage data={data} />
+      <LeagueContent data={data} />
     </div>
   )
 }

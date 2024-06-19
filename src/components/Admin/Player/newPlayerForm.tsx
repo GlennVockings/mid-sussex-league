@@ -67,7 +67,7 @@ export const NewPlayerForm = ({ teamId, season } : { teamId: string, season: str
   }
 
   return (
-    <div className="py-4 md:w-1/2">
+    <div className="md:w-1/2">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="flex flex-row gap-2">

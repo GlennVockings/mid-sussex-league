@@ -2,37 +2,17 @@
 
 import { MaxWidthWrapper } from "@/components/MaxWidthWrapper";
 import { getColor } from "@/lib/utils";
-import { useEffect, useState } from "react";
-import { LeagueTabs } from "./LeagueTabs";
+import { useState } from "react";
 import { LeagueContent } from "./LeagueContent";
-import { useAllLeagues } from "@/hooks/use-league";
-import { LeagueSummaryType } from "@/lib/type";
-import { Loading } from "../Loading";
 
 export const LeagueSummary = () => {
-  const [ activeLeague, setActiveLeague ] = useState<LeagueSummaryType>({ _id: "", league: ""});
-  const { data, isLoading } = useAllLeagues();
-
-  useEffect(() => {
-  if (!isLoading && data) {
-    setActiveLeague(data[0]);
-  }
-}, [data, isLoading])
-
-  if (isLoading) {
-    return <Loading />
-  }
-
-  if (data === undefined) {
-    return <div>No Information</div>
-  }
+  const [ activeLeague, setActiveLeague ] = useState<string>('premier-league');
 
   return (
-    <section className={getColor(activeLeague?.league ?? "")}>
+    <section className={getColor(activeLeague ?? "")}>
       <MaxWidthWrapper>
-        <LeagueTabs setActiveLeague={setActiveLeague} data={data} activeLeague={activeLeague} />
-        <LeagueContent league={activeLeague} />
+        <LeagueContent activeLeague={activeLeague} setActiveLeague={setActiveLeague}  />
       </MaxWidthWrapper>
     </section>
   )
-}
+} 

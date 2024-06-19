@@ -39,7 +39,7 @@ export const AdminSeason = ({ data, teamId } : {data: TeamSeasonType, teamId: st
   }
 
   if (isLoading) {
-    <Loading />
+    return <Loading />
   }
 
   return (

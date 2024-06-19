@@ -3,7 +3,7 @@ import { StatTable } from "./StatTable";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { cn, getColor } from "@/lib/utils";
 
-export const StatsSection = ({ data, league }: { data: StatCategoryType[], league: string }) => {
+export const StatsSection = ({ data, league }: { data: { team: StatCategoryType[], player:StatCategoryType[] }, league: string }) => {
   return (
     <Tabs defaultValue="club">
       <TabsList className={cn("grid w-full grid-cols-2", getColor(league, "accent"), getColor(league, "accent-text"))}>

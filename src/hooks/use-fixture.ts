@@ -1,10 +1,9 @@
 import { getFixtures } from "@/lib/queries";
 import { useQuery } from "@tanstack/react-query";
 
-export function useFixturesById(id: string) {
+export function useAllFixtures() {
   return useQuery({
-    queryKey: [ 'fixtures', id ],
-    queryFn: () => getFixtures(id),
-    enabled: !!id
+    queryKey: [ 'fixtures' ],
+    queryFn: () => getFixtures()
   })
 }

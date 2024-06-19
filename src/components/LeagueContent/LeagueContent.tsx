@@ -4,13 +4,11 @@ import { FixtureType, LeagueType } from "@/lib/type";
 import { LeagueTable } from "../LeagueTable";
 import { FaChevronRight } from "react-icons/fa6";
 import { FaChevronLeft } from "react-icons/fa6";
-import { cn, getColor } from "@/lib/utils";
+import { getColor } from "@/lib/utils";
 import { MonthCarousel } from "../MonthCarousel";
 import { FixturesCard } from "./FixturesCard";
 import { Separator } from "../ui/separator";
 import { MaxWidthWrapper } from "../MaxWidthWrapper";
-import { StatTable } from "../StatTable";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { NewsSection } from "./NewsSection";
 
 interface sortedFixtures {
@@ -18,7 +16,7 @@ interface sortedFixtures {
   fixtures: FixtureType[]
 }
 
-export const LeaguePage = ({ data } : { data: LeagueType }) => {
+export const LeagueContent = ({ data } : { data: LeagueType }) => {
   const [ seasonSelector, setSeasonSelector ] = useState(0);
   const [ isExpanded, setIsExpanded ] = useState(false)
   const [ activeMonth, setActiveMonth ] = useState("");
@@ -85,7 +83,6 @@ export const LeaguePage = ({ data } : { data: LeagueType }) => {
             {/* MAIN COLUMN */} 
             <div className="lg:col-span-2">
               <div className="grid grid-col-1 gap-4">
-                {/* ROW 1 */}
                 <div className="rounded-lg overflow-hidden flex flex-col">
                   <div className="bg-white py-4 flex justify-center">
                     <MonthCarousel data={sortedFixtures} league={data.league} setActiveMonth={setActiveMonth} />
@@ -108,25 +105,6 @@ export const LeaguePage = ({ data } : { data: LeagueType }) => {
                     }
                   </div>
                 </div>
-                {/* ROW 2 */}
-                <Tabs defaultValue="team">
-                  <TabsList className={cn("grid w-full grid-cols-2", getColor(data.league, "accent"), getColor(data.league, "accent-text"))}>
-                    <TabsTrigger value="team">Team Stats</TabsTrigger>
-                    <TabsTrigger value="player">Player Stats</TabsTrigger>
-                  </TabsList>
-                  <TabsContent value="team">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                      {
-                        data.seasons[seasonSelector].stats?.map(stat => {
-                          return <StatTable key={stat.name} title={stat.name} data={stat.stats} league={data.league} />;
-                        })
-                      }
-                    </div>
-                  </TabsContent>
-                  <TabsContent value="player">
-
-                  </TabsContent>
-                </Tabs>
               </div>
             </div>
           </div>

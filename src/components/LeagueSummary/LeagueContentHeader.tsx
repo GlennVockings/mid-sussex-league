@@ -1,14 +1,20 @@
+"use client"
+
 import { TeamType } from "@/lib/type"
 import { cn, getColor, replaceWithDash } from "@/lib/utils"
 import Image from "next/image"
 import Link from "next/link"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip"
+import { LeagueSelector } from "./LeagueSelector"
+import { useAllLeagues } from "@/hooks/use-league"
 
-export const LeagueContentHeader = ({ title, teams, year} : {title: string, teams: TeamType[], year: string }) => {
+export const LeagueContentHeader = ({ title, teams, year, setActiveLeague, activeLeague} : {title: string, teams: TeamType[], year: string, setActiveLeague: Function, activeLeague: string }) => {
+    const { data } = useAllLeagues();
+
   return (
     <div className="flex flex-col items-center gap-4 md:gap-0 md:justify-between md:flex-row">
       <div className="py-1 px-2 bg-white rounded-lg">
-        <p className="text-xl font-bold">{ title }</p>
+        <LeagueSelector setActiveLeague={setActiveLeague} data={data || []} activeLeague={activeLeague} />
       </div>
       <div className="flex justify-center gap-3 flex-wrap md:flex-nowrap ">
         {

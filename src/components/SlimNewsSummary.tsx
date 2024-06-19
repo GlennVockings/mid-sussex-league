@@ -5,9 +5,9 @@ import { fakeNews } from "../../dummyData"
 import Image from "next/image"
 import { Badge } from "./ui/badge"
 import { cn, getColor } from "@/lib/utils"
-import { TeamSummaryType } from "@/lib/type"
+import { TeamType } from "@/lib/type"
 
-export const SlimNewsSummary = ({ teams, league } : { teams: TeamSummaryType[], league: string }) => {
+export const SlimNewsSummary = ({ teams, league } : { teams: TeamType[], league: string }) => {
   const [ activeNewsItem, setActiveNewsItem ] = useState(0)
 
   const filteredNews = fakeNews.filter(news =>

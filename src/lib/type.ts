@@ -150,7 +150,7 @@ export interface PlayerType {
   _id: string
   firstName: string
   lastName: string
-  number: number
-  position: string
-  seasons: PlayerSeasonType[]
+  number?: number
+  position?: string
+  seasons?: PlayerSeasonType[]
 }

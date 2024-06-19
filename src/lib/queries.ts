@@ -1,5 +1,7 @@
 import axios from "axios"
-import { FixtureType, SeasonType, LeagueSummaryType, TeamSummaryType, LeagueType, TeamType } from "./type";
+import { FixtureType, SeasonType, LeagueSummaryType, TeamSummaryType, LeagueType, TeamType, PlayerType } from "./type";
+
+// League queries
 
 export async function getLeagues(): Promise<LeagueSummaryType[]> {
   try {
@@ -15,7 +17,7 @@ export async function getLeagues(): Promise<LeagueSummaryType[]> {
 export async function getLeagueName(name: string): Promise<LeagueType> {
   try {
     const response = await axios.get(`http://127.0.0.1:5000/api/v1/leagues/league?name=${name}`)
-    return response.data[0] as LeagueType;
+    return response.data as LeagueType;
   } catch (error) {
     // Handle errors
     console.error('Error fetching leagues:', error);
@@ -60,9 +62,9 @@ export async function getLeagueSummary(id :string): Promise<SeasonType> {
   }
 }
 
-export async function getFixtures(leagueId : string): Promise<FixtureType[]> {
+export async function getFixtures(): Promise<FixtureType[]> {
   try {
-    const response = await axios.get(`http://127.0.0.1:5000/api/v1/leagues/${leagueId}/upcomingFixtures`);
+    const response = await axios.get(`http://127.0.0.1:5000/api/v1/leagues/fixtures`);
     return response.data as FixtureType[];
   } catch (error) {
     // Handle errors
@@ -81,6 +83,8 @@ export async function getAllLeagueData(): Promise<LeagueType[]> {
     return [];
   }
 }
+
+// Team queries
 
 export async function getTeams(): Promise<TeamSummaryType[]> {
   try {
@@ -133,12 +137,32 @@ export async function getTeamByName(name: string, year: string): Promise<TeamTyp
           firstName: "",
           lastName: "",
           number: 0,
-          position: ""
+          position: "",
+          seasons: []
         }],
+        stats: {
+          goals: 0,
+          yellowCards: 0,
+          redCards: 0,
+          cleanSheets: 0
+        },
         _id: ""
       },
       parent: "",
       fixtures: []
     };
+  }
+}
+
+// Player queries
+
+export async function getAllPlayers(): Promise<PlayerType[]> {
+  try {
+    const response = await axios.get(`http://127.0.0.1/api/v1/players/list`)
+    return response.data as PlayerType[];
+  }  catch (error) {
+    // Handle errors
+    console.error('Error fetching players:', error);
+    return [];
   }
 }
