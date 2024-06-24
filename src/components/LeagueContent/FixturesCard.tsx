@@ -1,8 +1,14 @@
+"use client"
+
 import { FixtureType } from "@/lib/type"
 import { TeamName } from "../TeamName"
 import { cn, convertDate, getColor } from "@/lib/utils"
+import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
+import { useState } from "react";
+import { FixtureEvent } from "./FixtureEvent";
 
 export const FixturesCard = ({fixture, league}: {fixture: FixtureType, league: string}) => {
+  const [ openEvents, setOpenEvents ] = useState<boolean>(false);
 
   function fixtureStatus(fixture: FixtureType) {
     switch (fixture.status) {
@@ -87,7 +93,7 @@ export const FixturesCard = ({fixture, league}: {fixture: FixtureType, league: s
 
 
   return (
-    <div className="flex flex-col gap-2 bg-white py-2 px-2 md:px-1">
+    <div className="flex flex-col gap-2 bg-gradient-to-t from-blue-200 to-30% to-transparent py-2 px-2 md:px-1">
       <div className="flex justify-start md:justify-center gap-2">
         <p className="hidden text-nowrap md:block">{ convertDate(fixture.dateTime, "ddd Do MMM") }</p> 
         <p className="hidden md:block">|</p>
@@ -99,6 +105,33 @@ export const FixturesCard = ({fixture, league}: {fixture: FixtureType, league: s
       <div className="flex gap-2 text-sm md:hidden">
         <p className="text-nowrap">{ convertDate(fixture.dateTime, "ddd Do MMM") }</p>
         <p>{ convertDate(fixture.dateTime, "HH:mm" ) }</p>
+      </div>
+      <div>
+        {
+          fixture.status === "completed" ? (
+            <div className="flex flex-col">
+              <button 
+                className="w-full py-1 flex items-center gap-2 justify-center"
+                onClick={() => setOpenEvents(!openEvents)}
+              >
+                Show match events
+                <FaChevronDown className={cn("transition-all", openEvents ? "rotate-180" : "")} /> 
+              </button>
+              <div className={cn("flex transition-all overflow-y-scroll", openEvents ? "h-40 py-2" : "h-0")}>
+                <div className="flex flex-col gap-1 w-full">
+                  {
+                    fixture.events?.map(event => (
+                      <FixtureEvent key={event.player} {...event} />
+                    ))
+                  }
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div>
+            </div>
+          )
+        }
       </div>
     </div>
   )

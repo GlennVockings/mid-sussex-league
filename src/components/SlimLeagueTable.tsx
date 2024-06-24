@@ -82,7 +82,7 @@ export const SlimLeagueTable = ({ data, league } : { data: TableType[], league: 
       </Table>
       <div className="py-2">
         <Button variant="secondary" className={cn("flex gap-2", getColor(league, "accent"), getColor(league, "accent-text"))} asChild>
-          <Link href={`/${encodeURIComponent(league.toLowerCase())}`}>
+          <Link href={`/${encodeURIComponent(league.toLowerCase())}#table`}>
             View full table
             <IoArrowForwardOutline />
           </Link>

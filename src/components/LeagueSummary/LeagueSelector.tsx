@@ -1,7 +1,7 @@
 "use client"
 
 import { LeagueSummaryType } from "@/lib/type";
-import { cn } from "@/lib/utils";
+import { cn, replaceWithDash } from "@/lib/utils";
 import {
   Command,
   CommandEmpty,
@@ -23,8 +23,6 @@ export const LeagueSelector = ({ setActiveLeague, data, activeLeague } : { setAc
   const [open, setOpen ] = useState(false);
   const [value, setValue] = useState(activeLeague)
 
-  console.log(value)
-
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -35,7 +33,7 @@ export const LeagueSelector = ({ setActiveLeague, data, activeLeague } : { setAc
           className="w-[200px] justify-between"
         >
           {value
-            ? data.find((league) => league.league === value)?.league
+            ? data.find((league) => replaceWithDash(league.league) === value)?.league
             : "Select league..."}
           <FaSearch className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>

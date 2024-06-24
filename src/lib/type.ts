@@ -12,6 +12,7 @@ export interface TableType {
   for: number
   against: number
   points: number
+  goalDifference: number
   _id: string
 }
 

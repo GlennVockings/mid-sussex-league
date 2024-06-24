@@ -19,11 +19,9 @@ interface TableType {
   points: number
 }
 
-
-
 const columnHelper = createColumnHelper<TableType> ()
 
-export const LeagueTable = ({ data, expanded, teamName } : { data: TableType[], expanded: boolean, teamName?: string }) => {
+export const LeagueTable = ({ data, teamName } : { data: TableType[], teamName?: string }) => {
   const columns = [
      columnHelper.accessor('team', {
       header: 'Team',
@@ -145,11 +143,6 @@ export const LeagueTable = ({ data, expanded, teamName } : { data: TableType[], 
           {table.getHeaderGroups().map(headerGroup => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map(header => {
-                if (header.column.id === "wins" && !expanded) return
-                if (header.column.id === "loses" && !expanded) return
-                if (header.column.id === "draws" && !expanded) return
-                if (header.column.id === "for" && !expanded) return
-                if (header.column.id === "against" && !expanded) return
                 return <TableHead key={header.id} className="px-2 font-bold">
                   {header.isPlaceholder
                     ? null
@@ -167,11 +160,6 @@ export const LeagueTable = ({ data, expanded, teamName } : { data: TableType[], 
             return (
               <TableRow key={row.id} className={`${row.original.team.name === teamName ? cn(getColor(row.original.team.name, "accent"), getColor(row.original.team.name, "accent-text")) : ""}`}>
                 {row.getVisibleCells().map(cell => {
-                  if (cell.column.id === "wins" && !expanded) return
-                  if (cell.column.id === "loses" && !expanded) return
-                  if (cell.column.id === "draws" && !expanded) return
-                  if (cell.column.id === "for" && !expanded) return
-                  if (cell.column.id === "against" && !expanded) return
                   return <TableCell key={cell.id} className="px-2">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
