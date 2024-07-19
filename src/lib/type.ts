@@ -60,7 +60,18 @@ export interface SeasonType {
     team: StatCategoryType[],
     player: StatCategoryType[]
   }
-  teams: TeamType[]
+  teams: LeagueTeamType[]
+}
+
+export interface LeagueTeamType {
+  team: {
+    _id: string
+    name: string
+  }
+  goals: Number
+  cleanSheets: Number
+  redCards: Number
+  yellowCards: Number
 }
 
 export interface LeagueType {
