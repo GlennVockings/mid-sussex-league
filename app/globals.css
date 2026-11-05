@@ -1,26 +1,93 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-msfl-navy: var(--msfl-navy);
+  --color-msfl-blue: var(--msfl-blue);
+  --color-msfl-pale: var(--msfl-pale);
+
+  --color-page: var(--page);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  /*
+   * Prototype digital palette derived from the existing
+   * Mid Sussex Football League visual identity.
+   *
+   * These are NOT being claimed as official published
+   * MSFL hex values.
+   */
+  --msfl-navy: #17366d;
+  --msfl-blue: #244f91;
+  --msfl-pale: #e8eef8;
+
+  --page: #f3f5f7;
+  --surface: #ffffff;
+  --surface-muted: #f7f8fa;
+
+  --ink: #101828;
+  --muted: #667085;
+  --border: #e4e7ec;
+
+  --radius-card: 1.75rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--page);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  margin: 0;
+  background:
+    radial-gradient(
+      circle at 15% 0%,
+      rgba(36, 79, 145, 0.08),
+      transparent 30rem
+    ),
+    var(--page);
+  color: var(--ink);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--msfl-navy);
+  color: white;
+}
+
+/*
+ * Base UI popup root.
+ * Portalled UI should always sit above the application.
+ */
+.base-ui-popup {
+  z-index: 100;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
